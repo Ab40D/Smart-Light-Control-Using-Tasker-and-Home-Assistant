@@ -20,6 +20,8 @@ No cloud. No internet required. **100% local, fast, and reliable.**
 
 ## 🏗️ Architecture
 
+![Smart Light Control Blueprint](screenshots/blueprint.jpg)
+
 ```
 Phone Screen ON / OFF
         │
@@ -119,7 +121,7 @@ Optionally, use the provided automation YAML:
 ├── 📁 home-assistant/
 │   └── automation.yaml               # Optional HA automation
 ├── 📁 screenshots/
-│   └── architecture.jpg              # Add your architecture diagram here
+│   └── blueprint.jpg                 # System architecture blueprint
 └── 📄 LICENSE
 ```
 
