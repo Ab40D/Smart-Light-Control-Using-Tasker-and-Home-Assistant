@@ -1,0 +1,56 @@
+# ============================================================
+# Smart Light Control - Home Assistant Automation
+# Author: Abdelkhalek Mammeri
+# GitHub: https://github.com/Ab40D
+#
+# Description:
+#   Controls a Shelly relay (or any light entity) based on
+#   HTTP POST webhook calls from Tasker on your Android phone.
+#   Screen ON  → Light ON
+#   Screen OFF → Light OFF
+# ============================================================
+
+# --- Automation 1: Turn Light ON when screen turns ON ---
+- id: tasker_screen_on_light_on
+  alias: "Tasker - Screen ON → Light ON"
+  description: "Triggered by Tasker HTTP POST when phone screen turns ON"
+  trigger:
+    - platform: webhook
+      webhook_id: tasker_screen_on   # Use in Tasker: POST /api/webhook/tasker_screen_on
+      allowed_methods:
+        - POST
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.room_light   # <-- Replace with your entity ID
+      data:
+        brightness_pct: 100
+  mode: single
+
+# --- Automation 2: Turn Light OFF when screen turns OFF ---
+- id: tasker_screen_off_light_off
+  alias: "Tasker - Screen OFF → Light OFF"
+  description: "Triggered by Tasker HTTP POST when phone screen turns OFF"
+  trigger:
+    - platform: webhook
+      webhook_id: tasker_screen_off  # Use in Tasker: POST /api/webhook/tasker_screen_off
+      allowed_methods:
+        - POST
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: light.room_light   # <-- Replace with your entity ID
+  mode: single
+
+# ============================================================
+# ALTERNATIVE METHOD: Direct REST API (simpler, no webhook)
+#
+# In Tasker HTTP POST task use:
+#   URL:     http://YOUR_HA_IP:8123/api/services/light/turn_on
+#   Headers: Authorization: Bearer YOUR_HA_TOKEN
+#            Content-Type: application/json
+#   Body:    {"entity_id": "light.room_light"}
+#
+# To turn OFF change the URL to:
+#   http://YOUR_HA_IP:8123/api/services/light/turn_off
+# ============================================================
