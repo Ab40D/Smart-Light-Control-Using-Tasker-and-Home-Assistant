@@ -20,7 +20,7 @@ No cloud. No internet required. **100% local, fast, and reliable.**
 
 ## 🏗️ Architecture
 
-![Smart Light Control Blueprint](screenshots/blueprint.jpg)
+![Smart Light Control Blueprint](screenshots/blueprint.png)
 
 ```
 Phone Screen ON / OFF
